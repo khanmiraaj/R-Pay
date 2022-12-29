@@ -9,34 +9,43 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rpay.dto.UserDto;
 import com.rpay.dto.UserResponseDto;
+import com.rpay.entity.MerchantWallet;
 import com.rpay.entity.User;
+import com.rpay.repository.MerchantWalletRepository;
 import com.rpay.repository.RegisterMerchantRepository;
 
 @Service
 public class RegisterMerchantMangementService {
-	
+
 	@Autowired
 	private RegisterMerchantRepository registerMerchantRepository;
-	
+
+	@Autowired
+	private MerchantWalletRepository merchantWalletRepository;
+
 	@Autowired
 	private UserResponseDto responseDto;
-	
-	@Transactional(readOnly = false)
+
+	@Transactional
 	public UserResponseDto registerMerchant(UserDto userDto) {
 		User user = null;
-		Optional<User> optionalUser=null;
-		user =new User();
-		optionalUser=registerMerchantRepository.findByMobileNo(userDto.getMobileNo());
-		
-		if(optionalUser.isPresent()) {
+		Optional<User> optionalUser = null;
+		MerchantWallet merchantWallet = null;
+		user = new User();
+		optionalUser = registerMerchantRepository.findByMobileNo(userDto.getMobileNo());
+
+		if (optionalUser.isPresent()) {
 			responseDto.setStatusCode("S0001");
 			responseDto.setDescription("MobileNo is already registered with us.");
 			return responseDto;
 		}
-		
 		BeanUtils.copyProperties(userDto, user);
 		try {
 			registerMerchantRepository.save(user);
+			merchantWallet = new MerchantWallet();
+			merchantWallet.setWalletBalance(0);
+			merchantWallet.setWalletId("PAYOUT" + userDto.getMobileNo());
+			merchantWalletRepository.saveAndFlush(merchantWallet);
 			responseDto.setStatusCode("S000");
 			responseDto.setDescription("Merchant registered successfully");
 		} catch (Exception e) {

@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,53 +25,59 @@ public class User {
 	protected String address;
 	@Column(name = "password")
 	protected String password;
-	
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getBussinessLegalName() {
 		return bussinessLegalName;
 	}
+
 	public void setBussinessLegalName(String bussinessLegalName) {
 		this.bussinessLegalName = bussinessLegalName;
 	}
+
 	public String getEmailAddress() {
 		return emailAddress;
 	}
+
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
+
 	public String getMobileNo() {
 		return mobileNo;
 	}
+
 	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", bussinessLegalName=" + bussinessLegalName + ", emailAddress=" + emailAddress
 				+ ", mobileNo=" + mobileNo + ", address=" + address + ", password=" + password + "]";
 	}
-	
-	
-	
-	
 
 }

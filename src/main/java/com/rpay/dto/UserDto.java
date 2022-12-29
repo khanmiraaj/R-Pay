@@ -1,15 +1,15 @@
 package com.rpay.dto;
 
 public class UserDto {
-	
+
 	private String bussinessLegalName;
-	
+
 	private String mobileNo;
-	
+
 	private String emailAddress;
-	
+
 	private String address;
-	
+
 	private String password;
 
 	public String getBussinessLegalName() {
@@ -57,9 +57,5 @@ public class UserDto {
 		return "UserDto [bussinessLegalName=" + bussinessLegalName + ", mobileNo=" + mobileNo + ", emailAddress="
 				+ emailAddress + ", address=" + address + ", password=" + password + "]";
 	}
-	
-	
-	
-	
 
 }
