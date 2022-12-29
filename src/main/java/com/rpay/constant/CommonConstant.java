@@ -1,4 +1,4 @@
-package com.rpay.contant;
+package com.rpay.constant;
 
 import org.springframework.stereotype.Component;
 

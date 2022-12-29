@@ -1,5 +1,7 @@
 package com.rpay.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,16 @@ public class RegisterMerchantMangementService {
 	@Transactional(readOnly = false)
 	public UserResponseDto registerMerchant(UserDto userDto) {
 		User user = null;
+		Optional<User> optionalUser=null;
 		user =new User();
+		optionalUser=registerMerchantRepository.findByMobileNo(userDto.getMobileNo());
+		
+		if(optionalUser.isPresent()) {
+			responseDto.setStatusCode("S0001");
+			responseDto.setDescription("MobileNo is already registered with us.");
+			return responseDto;
+		}
+		
 		BeanUtils.copyProperties(userDto, user);
 		try {
 			registerMerchantRepository.save(user);

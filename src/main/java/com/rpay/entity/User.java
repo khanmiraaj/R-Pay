@@ -17,13 +17,13 @@ public class User {
 	protected String bussinessLegalName;
 	@Column(name = "email_address")
 	protected String emailAddress;
-	//@Id
 	@Column(name = "mobile_no")
 	protected String mobileNo;
 	@Column(name = "address")
-	protected String addresss;
+	protected String address;
 	@Column(name = "password")
 	protected String password;
+	
 	
 	public int getId() {
 		return id;
@@ -49,17 +49,25 @@ public class User {
 	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
-	public String getAddresss() {
-		return addresss;
+	
+	public String getAddress() {
+		return address;
 	}
-	public void setAddresss(String addresss) {
-		this.addresss = addresss;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", bussinessLegalName=" + bussinessLegalName + ", emailAddress=" + emailAddress
-				+ ", mobileNo=" + mobileNo + ", addresss=" + addresss + "]";
+				+ ", mobileNo=" + mobileNo + ", address=" + address + ", password=" + password + "]";
 	}
+	
 	
 	
 	
