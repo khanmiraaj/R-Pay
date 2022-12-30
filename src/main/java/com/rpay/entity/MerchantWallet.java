@@ -17,7 +17,9 @@ public class MerchantWallet {
 	protected double walletBalance;
 	@Column(name = "wallet_id")
 	protected String walletId;
-	
+	@Column(name = "merchant_id")
+	protected String merchantId;
+
 	public int getId() {
 		return id;
 	}
@@ -40,6 +42,20 @@ public class MerchantWallet {
 
 	public void setWalletId(String walletId) {
 		this.walletId = walletId;
+	}
+
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
+	}
+
+	@Override
+	public String toString() {
+		return "MerchantWallet [id=" + id + ", walletBalance=" + walletBalance + ", walletId=" + walletId
+				+ ", merchantId=" + merchantId + "]";
 	}
 
 }

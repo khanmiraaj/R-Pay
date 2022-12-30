@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +23,8 @@ public class User {
 	protected String address;
 	@Column(name = "password")
 	protected String password;
+	@Column(name = "merchant_id")
+	protected String merchantId;
 
 	public int getId() {
 		return id;
@@ -74,10 +74,19 @@ public class User {
 		this.password = password;
 	}
 
+	public String getMerchantId() {
+		return merchantId;
+	}
+
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", bussinessLegalName=" + bussinessLegalName + ", emailAddress=" + emailAddress
-				+ ", mobileNo=" + mobileNo + ", address=" + address + ", password=" + password + "]";
+				+ ", mobileNo=" + mobileNo + ", address=" + address + ", password=" + password + ", merchantId="
+				+ merchantId + "]";
 	}
 
 }

@@ -35,25 +35,36 @@ public class RegisterMerchantMangementService {
 		optionalUser = registerMerchantRepository.findByMobileNo(userDto.getMobileNo());
 
 		if (optionalUser.isPresent()) {
-			responseDto.setStatusCode("S0001");
+			responseDto.setStatusCode("F0000");
 			responseDto.setDescription("MobileNo is already registered with us.");
 			return responseDto;
 		}
 		BeanUtils.copyProperties(userDto, user);
+		String merchantId=generateMerchantId(userDto.getMobileNo(), userDto.getBussinessLegalName());
+		user.setMerchantId(merchantId);
 		try {
 			registerMerchantRepository.save(user);
 			merchantWallet = new MerchantWallet();
 			merchantWallet.setWalletBalance(0);
 			merchantWallet.setWalletId("PAYOUT" + userDto.getMobileNo());
+			merchantWallet.setMerchantId(merchantId);
 			merchantWalletRepository.saveAndFlush(merchantWallet);
-			responseDto.setStatusCode("S000");
+			responseDto.setStatusCode("S0000");
 			responseDto.setDescription("Merchant registered successfully");
 		} catch (Exception e) {
-			responseDto.setStatusCode("F000");
+			responseDto.setStatusCode("F0001");
 			responseDto.setDescription("Failed to Register Merchant");
 
 		}
 		return responseDto;
+
+	}
+
+	private String generateMerchantId(String mobileNo, String bussinessLegalName) {
+		mobileNo = mobileNo.substring(6, 10);
+		bussinessLegalName = bussinessLegalName.substring(0, 4).toUpperCase();
+		String merchantId = "MERCHANT" + mobileNo + bussinessLegalName;
+		return merchantId;
 
 	}
 }

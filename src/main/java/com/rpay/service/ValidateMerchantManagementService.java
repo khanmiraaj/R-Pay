@@ -32,14 +32,14 @@ public class ValidateMerchantManagementService {
 			user = optionalUser.get();
 			String registeredPassword = user.getPassword();
 			if (StringUtils.equalsIgnoreCase(enteredPassword, registeredPassword)) {
-				userResponseDto.setStatusCode("S000");
+				userResponseDto.setStatusCode("S0001");
 				userResponseDto.setDescription("login success/valid credential");
 			} else {
-				userResponseDto.setStatusCode("F000");
+				userResponseDto.setStatusCode("F0002");
 				userResponseDto.setDescription("login Failed/Invalid credential");
 			}
 		} else {
-			userResponseDto.setStatusCode("F0001");
+			userResponseDto.setStatusCode("F0003");
 			userResponseDto.setDescription("You are not registered with us");
 		}
 
